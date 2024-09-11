@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import cn from 'classnames';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';

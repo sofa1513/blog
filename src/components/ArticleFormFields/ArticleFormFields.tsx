@@ -1,4 +1,3 @@
-import React from 'react';
 import cn from 'classnames';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';

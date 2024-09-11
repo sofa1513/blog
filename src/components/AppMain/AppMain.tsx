@@ -1,4 +1,3 @@
-import React from 'react';
 import cn from 'classnames';
 
 import ListItems from '../ListItems/ListItems';
