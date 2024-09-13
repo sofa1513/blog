@@ -11,7 +11,7 @@ export interface Author {
     tagList: string[];
     title: string;
     favoritesCount: number;
-    favorited: boolean;
+    favorited?: boolean;
   }
   
   export interface AvatarProps {

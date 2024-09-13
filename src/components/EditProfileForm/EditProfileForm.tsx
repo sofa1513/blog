@@ -15,7 +15,8 @@ type Inputs = {
   username: string;
   email: string;
   password: string;
-  image: string;
+  image?: string;
+  
 };
 
 export type UserPut = {
@@ -36,13 +37,15 @@ const EditProfileForm = () => {
       .email('Email address is not valid'),
     password: Yup.string()
       .min(6, 'Password length should be at least 6 characters')
-      .max(40, 'Password cannot exceed more than 40 characters'),
+      .max(40, 'Password cannot exceed more than 40 characters')
+      .required('Password is required'),
     image: Yup.string()
       .url('Image URL is not valid')
       .matches(
         /\.(jpeg|jpg|gif|png|svg)$/,
         'Image URL should link to an image file'
       ),
+      
 
   });
 

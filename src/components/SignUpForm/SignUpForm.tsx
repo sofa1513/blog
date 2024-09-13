@@ -44,7 +44,8 @@ const SignUpForm = () => {
       .min(6, 'Password length should be at least 6 characters')
       .max(40, 'Password cannot exceed more than 40 characters')
       .oneOf([Yup.ref('password')], 'Passwords do not match'),
-    termOfService: Yup.boolean().oneOf([true], 'You must accept the terms and conditions'),
+    termOfService: Yup.boolean().oneOf([true], 'You must accept the terms and conditions')
+    .required('Term of Service is required'),
   });
 
   const {

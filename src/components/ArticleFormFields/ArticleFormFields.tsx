@@ -16,9 +16,7 @@ export interface Inputs {
   title: string;
   description: string;
   body: string;
-  tagList: {
-    name: string;
-  }[];
+  tagList?: { name: string; }[] | undefined;
 }
 const loader = (
   <div className={classes.form__spin}>
@@ -91,7 +89,7 @@ const ArticleFormFields = ({ slug }: Slug) => {
         title: data.title,
         description: data.description,
         body: data.body,
-        tagList: data.tagList.map((tag) => tag.name),
+        tagList: data.tagList ? data.tagList.map((tag) => tag.name) : [], 
       },
     };
 

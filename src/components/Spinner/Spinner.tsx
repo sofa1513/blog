@@ -10,7 +10,9 @@ interface ISpinProps {
 const Spinner = ({ size = 40 }: ISpinProps) => {
   const antIcon = <LoadingOutlined style={{ fontSize: size }} spin />;
 
-  return <Spin className={classes.main__spin} indicator={antIcon} />;
+  return (
+    <Spin className={classes.form__spin} indicator={antIcon} />
+  );
 };
 
 export { Spinner };
