@@ -1,20 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2021",                         // Компиляция до ES2021
-    "useDefineForClassFields": true,            // Правильная поддержка полей классов, как в стандарте
-    "lib": ["dom", "dom.iterable", "esnext"],  // Библиотеки ES2021 и для работы с DOM
-    "module": "ESNext",                         // Модули ESNext
-    "skipLibCheck": true,                       // Пропуск проверки типов библиотек
-    "moduleResolution": "bundler",              // Для работы с бандлером (например, Vite)
-    "allowImportingTsExtensions": true,         // Разрешает импорты с расширениями .ts
-    "isolatedModules": true,                    // Отдельная компиляция файлов
-    "moduleDetection": "force",                 // Принудительное обнаружение модулей
-    "noEmit": true,                             // Не генерирует JS файлы
-    "jsx": "react-jsx",                         // Поддержка JSX синтаксиса для React
-    "strict": true,                             // Включен строгий режим типизации
-    "noUnusedLocals": true,                     // Запрет на неиспользуемые локальные переменные
-    "noUnusedParameters": true,                 // Запрет на неиспользуемые параметры функций
-    "noFallthroughCasesInSwitch": true          // Защита от ошибок в switch
-  },
-  "include": ["src"]                            // Включение всех файлов в папке src
+    "module": "commonjs",
+    "target": "es6",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }                      
 }
