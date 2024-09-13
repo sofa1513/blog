@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { Outlet } from 'react-router-dom';
 import cn from 'classnames';
 import AppHeader from '../AppHeader/AppHeader';
-import classes from '../App/App.module.scss';
+import classes from '../../App/App.module.scss';
 const Layout = () => {
     return (_jsx(_Fragment, { children: _jsxs("div", { className: cn(classes.app), children: [_jsx(AppHeader, {}), _jsx(Outlet, {})] }) }));
 };

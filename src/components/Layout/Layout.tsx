@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import cn from 'classnames';
 
 import AppHeader from '../AppHeader/AppHeader';
-import classes from '../App/App.module.scss';
+import classes from '../../App/App.module.scss';
 
 const Layout = () => {
   return (
