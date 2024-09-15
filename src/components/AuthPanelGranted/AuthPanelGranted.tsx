@@ -4,8 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
-import avatar from '../item/avatar.svg';
-
+import avatar from '../../assets/avatar.svg';
 import classes from './AuthPanelGranted.module.scss';
 
 const AuthPanelGranted = () => {
