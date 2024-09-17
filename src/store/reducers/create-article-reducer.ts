@@ -26,7 +26,7 @@ const createArticleReducer = (state = initialState, action: NewArticleAction): C
     case CreateArticleActionTypes.FETCH_CREATE_ARTICLE_SUCCESS:
       return {
         ...state,
-        article: { ...action.payload.article },
+        article: { ...action.payload },
         loading: false,
         error: null,
       };

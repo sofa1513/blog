@@ -10,6 +10,7 @@ const initialState: EditArticleState = {
       following: false,
       image: '',
       username: '',
+      bio: null
     },
     createdAt: '',
     description: '',

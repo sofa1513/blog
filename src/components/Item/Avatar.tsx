@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import cn from 'classnames';
 import { AvatarProps } from '../../types/Item';
@@ -6,7 +8,10 @@ import classes from './item.module.scss';
 import defaultAvatar from './avatar.svg';
 
 const Avatar: React.FC<AvatarProps> = ({ imageUrl }) => {
-  const [avatarSrc, setAvatarSrc] = useState(isValidUrl(imageUrl) ? imageUrl : defaultAvatar);
+  
+  const [avatarSrc, setAvatarSrc] = useState<string>(
+    isValidUrl(imageUrl || '') ? (imageUrl || '') : defaultAvatar
+  );
 
   const handleImageError = () => {
     setAvatarSrc(defaultAvatar); // заглушка

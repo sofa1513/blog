@@ -1,6 +1,6 @@
-import { AnArticleState, AnArticleActionTypes, AnArticleAction } from '../../types/LoadAnArticle';
+import { ArticleState, ArticleActionTypes, ArticleAction } from '../../types/LoadAnArticle';
 
-const initialState: AnArticleState = {
+const initialState: ArticleState = {
   article: {
     slug: '',
     title: '',
@@ -10,6 +10,7 @@ const initialState: AnArticleState = {
       following: false,
       image: '',
       username: '',
+      bio: null
     },
     createdAt: '',
     description: '',
@@ -19,13 +20,13 @@ const initialState: AnArticleState = {
   error: null,
 };
 
-const loadAnArticleReducer = (state = initialState, action: AnArticleAction): AnArticleState => {
+const loadAnArticleReducer = (state = initialState, action: ArticleAction): ArticleState => {
   switch (action.type) {
-    case AnArticleActionTypes.FETCH_ARTICLE:
+    case ArticleActionTypes.FETCH_ARTICLE:
       return { ...state, loading: true, error: null };
-    case AnArticleActionTypes.FETCH_ARTICLE_SUCCESS:
+    case ArticleActionTypes.FETCH_ARTICLE_SUCCESS:
       return { ...state, article: { ...action.payload }, loading: false, error: null };
-    case AnArticleActionTypes.FETCH_ARTICLE_ERROR:
+    case ArticleActionTypes.FETCH_ARTICLE_ERROR:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;

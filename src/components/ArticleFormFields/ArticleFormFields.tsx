@@ -1,3 +1,4 @@
+
 import cn from 'classnames';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,6 +10,8 @@ import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { Spinner } from '../Spinner/Spinner';
 import { Slug } from '../Article/Article';
+import { IPostArticle } from '../../types/CreateArticle';
+
 
 import classes from './ArticleFormFields.module.scss';
 
@@ -18,6 +21,7 @@ export interface Inputs {
   body: string;
   tagList?: { name: string; }[] | undefined;
 }
+
 const loader = (
   <div className={classes.form__spin}>
     <Spinner size={25} />
@@ -27,11 +31,12 @@ const loader = (
 const ArticleFormFields = ({ slug }: Slug) => {
   const tagListSchema = {
     name: Yup.string()
-      .required('If you don not want to add tag, please delete this field')
+      .required('If you do not want to add a tag, please delete this field')
       .max(14, 'Tag length cannot exceed more than 14 characters'),
   };
+
   const formSchema = Yup.object().shape({
-    title: Yup.string().required('Title is required').max(54, 'Text length cannot exceed more than 54 characters'),
+    title: Yup.string().required('Title is required').max(54, 'Title length cannot exceed more than 54 characters'),
     description: Yup.string()
       .required('Description is required')
       .max(231, 'Description length cannot exceed more than 231 characters'),
@@ -40,26 +45,25 @@ const ArticleFormFields = ({ slug }: Slug) => {
   });
 
   const { fetchCreateArticle, fetchEditArticle, fetchArticles } = useActions();
-  const navigate = !slug ? () => null : useNavigate();
+  const navigate = slug ? useNavigate() : () => null;
 
-  const typeOfFetch = !slug ? fetchCreateArticle : fetchEditArticle;
-  const needFetchArticles = !slug ? () => null : fetchArticles;
+  const typeOfFetch = slug ? fetchEditArticle : fetchCreateArticle;
+  const needFetchArticles = slug ? fetchArticles : () => null;
 
   const { article } = useTypedSelector((state) => state.anArticle);
   const { loading } = useTypedSelector((state) => state.createArticle);
+
   const { title, description, body, tagList } = article;
-  const defaultTitle = !slug ? '' : title;
-  const defaultDescription = !slug ? '' : description;
-  const defaultBody = !slug ? '' : body;
-  const formatedTagList = tagList.map((tag) => {
-    return { name: tag };
-  });
-  const defaultTagList = !slug ? [] : formatedTagList;
+  const defaultTitle = slug ? title : '';
+  const defaultDescription = slug ? description : '';
+  const defaultBody = slug ? body : '';
+  const formatedTagList = tagList.map((tag: string) => ({ name: tag }));
+  const defaultTagList = slug ? formatedTagList : [];
   const createdMsg = 'Article created successfully';
   const editedMsg = 'Article edited successfully';
-  const typeOfMessage = !slug ? createdMsg : editedMsg;
+  const typeOfMessage = slug ? editedMsg : createdMsg;
 
-  const tagsIndexesForErrors = [];
+  const tagsIndexesForErrors: number[] = [];
 
   const {
     register,
@@ -84,13 +88,13 @@ const ArticleFormFields = ({ slug }: Slug) => {
   });
 
   function onSubmit(data: Inputs) {
-    const article = {
-      article: {
-        title: data.title,
-        description: data.description,
-        body: data.body,
-        tagList: data.tagList ? data.tagList.map((tag) => tag.name) : [], 
-      },
+    const article: IPostArticle = {
+      article:{
+      title: data.title,
+      description: data.description,
+      body: data.body,
+      tagList: data.tagList ? data.tagList.map((tag) => tag.name) : [],
+    }
     };
 
     typeOfFetch(article, slug);
@@ -128,7 +132,7 @@ const ArticleFormFields = ({ slug }: Slug) => {
         id='body'
       />
       <span className={cn(classes['form__span-error'])}>{errors?.body && errors?.body?.message}</span>
-      <label  className={cn(classes['form__label-tags'], classes['form-label'])}>Tags</label>
+      <label className={cn(classes['form__label-tags'], classes['form-label'])}>Tags</label>
       <div className={cn(classes['form__div-tags'])}>
         <div className={cn(classes['div-tags__new-tag'], classes['div-tag'])}>
           {fields.map((field, index) => {
@@ -142,7 +146,6 @@ const ArticleFormFields = ({ slug }: Slug) => {
                     className={cn(classes['div-wrap__input-tag'], classes['form-input'])}
                     type="text"
                     placeholder="Tag"
-                    
                   />
                   <button
                     className={cn(classes['div-wrap__delete-btn'], classes['tag-delete-btn'])}

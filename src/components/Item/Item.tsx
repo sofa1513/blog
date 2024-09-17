@@ -40,7 +40,7 @@ const Item: React.FC<ItemProps> = ({
             <span className={cn(classes['div-user-date__user-name'])}>{author.username}</span>
             <span className={cn(classes['div-user-date__date'])}>{formattedDate}</span>
           </div>
-          <Avatar imageUrl={author.image} />
+          <Avatar imageUrl={author.image ?? undefined} />
         </div>
       </div>
       <span className={cn(classes.item__text)}>{formattedDescription}</span>

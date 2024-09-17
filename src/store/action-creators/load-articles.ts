@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import { ArticlesAction, ArticlesActionTypes } from '../../types/LoadArticles';
-import { AnArticleAction, AnArticleActionTypes } from '../../types/LoadAnArticle';
+import { ArticleAction, ArticleActionTypes } from '../../types/LoadAnArticle';
 import { blogService } from '../../services/BlogFunctions';
 
 export const fetchArticles = (offset = 0) => {
@@ -35,19 +35,19 @@ export const fetchArticles = (offset = 0) => {
 };
 
 export const fetchAnArticle = (slug: string | undefined | null) => {
-  return async (dispatch: Dispatch<AnArticleAction>) => {
+  return async (dispatch: Dispatch<ArticleAction>) => {
     try {
-      dispatch({ type: AnArticleActionTypes.FETCH_ARTICLE });
+      dispatch({ type: ArticleActionTypes.FETCH_ARTICLE });
 
       const article = await blogService.getAnArticle(slug);
 
       dispatch({
-        type: AnArticleActionTypes.FETCH_ARTICLE_SUCCESS,
+        type: ArticleActionTypes.FETCH_ARTICLE_SUCCESS,
         payload: { ...article },
       });
     } catch (e) {
       dispatch({
-        type: AnArticleActionTypes.FETCH_ARTICLE_ERROR,
+        type: ArticleActionTypes.FETCH_ARTICLE_ERROR,
         payload: 'Произошла ошибка при загрузке статьи.',
       });
     }
